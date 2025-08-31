@@ -1,5 +1,5 @@
-import fetch from "node-fetch";
-import { Telegraf } from "telegraf";
+const fetch = require("node-fetch");
+const { Telegraf } = require("telegraf");
 
 // Telegram Bot Token এবং Chat ID
 const BOT_TOKEN = "8034233581:AAHA_fQAHggXWucU54cqTdmCxYjGKKSHQZk";
