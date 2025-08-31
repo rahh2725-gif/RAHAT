@@ -3,24 +3,20 @@ name: LIKHON-BOT
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'   # Node 18+ use করুন, v3 node-fetch support করার জন্য
 
       - name: Install dependencies
         run: npm install
 
-      - name: LIKHON-BOT
+      - name: Start Bot
         run: npm start
