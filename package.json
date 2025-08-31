@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "Telegram Bot for WinGo 1M Live Prediction",
   "main": "bot.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
     "node-fetch": "^2.6.9",
     "telegraf": "^4.16.2"
+  },
+  "engines": {
+    "node": ">=14"
   },
   "author": "YourName",
   "license": "MIT"
