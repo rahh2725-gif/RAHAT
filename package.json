@@ -1,0 +1,16 @@
+{
+  "name": "wingo-live-bot",
+  "version": "1.0.0",
+  "description": "Telegram Bot for WinGo 1M Live Prediction",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.4.0",
+    "telegraf": "^4.16.2"
+  },
+  "author": "YourName",
+  "license": "MIT",
+  "type": "module"
+}
