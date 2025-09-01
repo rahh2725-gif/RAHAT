@@ -31,7 +31,9 @@ async function getHistory() {
       colorCount[r.color] = (colorCount[r.color] || 0) + 1;
     });
 
-    let predicted = Object.keys(colorCount).reduce((a, b) => colorCount[a] > colorCount[b] ? a : b);
+    let predicted = Object.keys(colorCount).reduce((a, b) =>
+      colorCount[a] > colorCount[b] ? a : b
+    );
     const lastRound = last10[0];
 
     return { lastRound, predicted };
@@ -51,12 +53,27 @@ async function checkLiveRound() {
       }
     });
 
+    const text = await res.text();
     let data;
+
     try {
-      data = await res.json();
+      data = JSON.parse(text);
     } catch (e) {
       console.error("Failed to parse JSON from LIVE_API:", e.message);
-      await bot.telegram.sendMessage(CHAT_ID, `⚠️ Warning: Live API returned invalid JSON.`);
+      console.log("Live API Response (debug):", text.substring(0, 200));
+      await bot.telegram.sendMessage(
+        CHAT_ID,
+        `⚠️ Warning: Live API returned invalid JSON.`
+      );
+      return;
+    }
+
+    if (!data.current || !data.next) {
+      console.error("Live API JSON structure invalid:", data);
+      await bot.telegram.sendMessage(
+        CHAT_ID,
+        `⚠️ Warning: Live API JSON structure invalid.`
+      );
       return;
     }
 
@@ -77,8 +94,12 @@ async function checkLiveRound() {
 Current Round: ${currentRound}
 Next Round: ${nextRound}
 Time Left: ${timeLeft}s
-Previous Round: ${prevRoundData ? prevRoundData.number + ' (' + prevRoundData.color + ')' : previousRoundNumber}
-Predicted Next: ${predicted || 'N/A'}
+Previous Round: ${
+        prevRoundData
+          ? prevRoundData.number + " (" + prevRoundData.color + ")"
+          : previousRoundNumber
+      }
+Predicted Next: ${predicted || "N/A"}
 `;
 
       await bot.telegram.sendMessage(CHAT_ID, message);
@@ -86,7 +107,10 @@ Predicted Next: ${predicted || 'N/A'}
     }
   } catch (error) {
     console.error("Live API Fetch Error:", error.message);
-    await bot.telegram.sendMessage(CHAT_ID, `⚠️ Warning: Failed to fetch Live API.`);
+    await bot.telegram.sendMessage(
+      CHAT_ID,
+      `⚠️ Warning: Failed to fetch Live API.`
+    );
   }
 }
 
