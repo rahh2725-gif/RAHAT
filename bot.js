@@ -2,8 +2,8 @@ import fetch from "node-fetch";
 import { Telegraf } from "telegraf";
 
 // Telegram Bot Token এবং Chat ID
-const BOT_TOKEN = "YOUR_BOT_TOKEN_HERE";
-const CHAT_ID = "YOUR_CHAT_ID_HERE";
+const BOT_TOKEN = "8034233581:AAFWglLfqFA2ycJQess7MnJVBcQF3VMz3w8";
+const CHAT_ID = "7933110913";
 
 // API URLs
 const HISTORY_API = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
