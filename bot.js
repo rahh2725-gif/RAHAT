@@ -19,15 +19,18 @@ async function getHistory() {
   try {
     const res = await fetch(HISTORY_API, {
       headers: {
-        "User-Agent": "Mozilla/5.0",
-        "Accept": "application/json"
-      }
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0 Safari/537.36",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Referer": "https://dkwin9.com/",
+        "Origin": "https://dkwin9.com",
+      },
     });
     const data = await res.json();
     const last10 = data.slice(0, 10);
 
     let colorCount = { Red: 0, Green: 0, Blue: 0 };
-    last10.forEach(r => {
+    last10.forEach((r) => {
       colorCount[r.color] = (colorCount[r.color] || 0) + 1;
     });
 
@@ -48,9 +51,13 @@ async function checkLiveRound() {
   try {
     const res = await fetch(LIVE_API, {
       headers: {
-        "User-Agent": "Mozilla/5.0",
-        "Accept": "application/json"
-      }
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0 Safari/537.36",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Referer": "https://dkwin9.com/",
+        "Origin": "https://dkwin9.com",
+        "Connection": "keep-alive",
+      },
     });
 
     const text = await res.text();
