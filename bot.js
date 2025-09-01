@@ -1,5 +1,5 @@
-const fetch = require("node-fetch");
-const { Telegraf } = require("telegraf");
+import fetch from "node-fetch";
+import { Telegraf } from "telegraf";
 
 // Telegram Bot Token এবং Chat ID
 const BOT_TOKEN = "YOUR_BOT_TOKEN_HERE";
@@ -71,7 +71,6 @@ async function checkLiveRound() {
       return;
     }
 
-    // Live API structure check
     if (!data || !data.issueNumber) {
       console.error("Live API JSON structure invalid:", data);
       await bot.telegram.sendMessage(
@@ -82,14 +81,12 @@ async function checkLiveRound() {
     }
 
     const currentRound = data.issueNumber;
-    const nextRound = data.nextIssueNumber || "N/A"; // যদি থাকে
-    const endTime = data.endTime || Date.now() + 60000; // fallback 60s
+    const nextRound = data.nextIssueNumber || "N/A"; 
+    const endTime = data.endTime || Date.now() + 60000;
 
-    // Duplicate round avoid
     if (lastRound === currentRound) return;
     lastRound = currentRound;
 
-    // Get history for prediction
     const { lastRound: prevRoundData, predicted } = await getHistory();
     const now = Date.now();
     const timeLeft = Math.max(0, Math.floor((endTime - now) / 1000));
